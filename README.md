@@ -9,7 +9,6 @@ The primary bloat to the state have been generated from the following contracts.
 	* [`0x8a2e29e7d66569952ecffae4ba8acb49c1035b6f`](https://etherscan.io/address/0x8a2e29e7d66569952ecffae4ba8acb49c1035b6f)
 
 
-
 ### `0x6a0a0fc761c612c340a0e98d33b37a75e5268472`
 
 This one generated suicides into sequentially increasing addresses, from
@@ -71,3 +70,14 @@ The file `state_bloat_transactions_original.json` was generated from the Etherch
 The `preprocess_data.py` generates all data based on the `state_bloat_transactions_original.json`. During execution, it saves results to files, and can be aborted/resumed. In this repo, the files are already generated and the script does not need to actually do much work. 
 
 If you want to regenerate the data based on `state_bloat_transactions_original.json` from scratch, you need to delete the other json-files and ensure that you have a http-api with `debug` available: `geth --rpc --rpcapi "debug,eth"`
+
+
+## Live contracts
+
+The `Sweeper.sol` contract was deployed on the main net in [0xad4ceddc9e345ac9f3076bf657ee1e22e382b98de6d351d35c7f8e28e8398021](https://etherscan.io/tx/0xad4ceddc9e345ac9f3076bf657ee1e22e382b98de6d351d35c7f8e28e8398021), and lives on [0xa43ebd8939d8328f5858119a3fb65f65c864c6dd](https://etherscan.io/address/0xa43ebd8939d8328f5858119a3fb65f65c864c6dd)
+
+```javascript
+
+var sweeperAbi = [{"constant":false,"inputs":[{"name":"s","type":"uint256"},{"name":"i","type":"uint256"}],"name":"sol_clean","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"s","type":"uint256"},{"name":"i","type":"uint256"}],"name":"asm_clean","outputs":[],"payable":false,"type":"function"}];
+var sweeperContract = web3.eth.contract(sweeperAbi).at("0xa43ebd8939d8328f5858119a3fb65f65c864c6dd");
+```
