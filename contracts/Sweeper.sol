@@ -6,7 +6,7 @@ pragma solidity ^0.4.4;
 contract Sweeper
 {
     //FOR DEBUGGING ONLY
-    event Touch(address victim); // Event
+    //event Touch(address victim); // Event
     
     //Solidity implentation
     // 0,500 -> 122726 exec cost
@@ -18,7 +18,8 @@ contract Sweeper
             b = address(x/0x1000000000000000000000000);
             b.send(0);
             //Log operation, purely for testing
-            Touch(b);
+            //Touch(b);
+
         }
     }
     //Asm implementation
@@ -35,11 +36,11 @@ contract Sweeper
         
         loop:
             target := add(target,seed)
-            pop(call(6,div(target,0x1000000000000000000000000),0,0,0,0,0))
+            pop(call(0,div(target,0x1000000000000000000000000),0,0,0,0,0))
             
             //Log operation, purely for testing
-            mstore(0,div(target,0x1000000000000000000000000))
-            log1(12, 20,0 )
+            //mstore(0,div(target,0x1000000000000000000000000))
+            //log1(12, 20,0 )
             //End testing
             
             iterations := sub(iterations,1) 
@@ -90,7 +91,7 @@ contract SweepTester
         // 77788714880254563974170405891857433773626328471528739617194097914827086088366
         // 0xabfada34e10cf0661cbf65bcda3360caf22933cb8476abb2b5bafb10a31dc8ae
         // Log(seed);
-        s.sol_clean(seed,5);
+        s.sol_clean(seed,100);
     }
             
     function testAssemblySweep(){
@@ -98,6 +99,6 @@ contract SweepTester
         uint bhash = 0xe277215aaddec233ee91348eac3360caf22933cb8476abb2b5bafb10a31dc8ae;
         uint seed = input + bhash;
         
-        s.asm_clean(seed, 5);
+        s.asm_clean(seed, 100);
     }
 }

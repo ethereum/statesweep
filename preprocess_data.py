@@ -188,6 +188,7 @@ def processTransactions():
     return failures
 
 
+
 def outputResult():
     """
         Reads the intermediary files
@@ -231,6 +232,62 @@ def outputResult():
     savejson("final_data.json", final_data)
 
 
+def calculateAddrNr(seedhex, num):
+    """
+
+
+    """
+    seed = parse_int_or_hex(seedhex)
+
+    seed = seed * (num+1) / 0x1000000000000000000000000
+    addr = seed & 0xffffffffffffffffffffffffffffffffffffffff;
+    return int_to_hexstring(addr)
+
+def testResult():
+    """ Tests that the 100th address generated from the seed of txhash 
+    '0x2ca818c26c1e2061206eea43de1eb29095e7071a4e4fe4e5fc6c70f9dd619857'
+    is indeed the correct one: 
+    '0xd9f816dcca1ad84957832382164530118a416f4b'
+
+    see suicide_100_0 at 
+    https://etherscan.io/tx/0x2ca818c26c1e2061206eea43de1eb29095e7071a4e4fe4e5fc6c70f9dd619857#internal
+    """
+    print("Verifying...")
+    transactions = loadjson("state_bloat_transactions.json")
+    mappings = loadjson("mappings_gas_suicidecount.json")
+
+    def numSuicides(tx):
+        return mappings[str(tx['gasUsed'])]
+
+
+    totalSuicides = 0
+    
+    final_data = []
+    tx = None
+    for tx in transactions:
+        if tx['txhash'] == '0x2ca818c26c1e2061206eea43de1eb29095e7071a4e4fe4e5fc6c70f9dd619857':
+            break
+    else:
+        raise Exception("Tx not found")
+
+    # input to transaction, right-padded with zeroes to 32 bytes
+    inp = pad(tx['input'])
+    # hash of preceding block
+    h = tx['blh']
+
+    # Calculate the seed
+    # Blockhash(num -1) + input
+    seed = parse_int_or_hex(h) + parse_int_or_hex(inp)
+    seed = seed & 0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+    seed = int_to_hexstring(seed)
+
+    addr = calculateAddrNr(seed,100)
+    assert addr == '0xd9f816dcca1ad84957832382164530118a416f4b'
+    print("Address %s correct!" % addr )
+
+
+
+
 def main():
 
     # This script writes to 'state_bloat_transactions.json' during script execution. 
@@ -262,6 +319,7 @@ def main():
     # Output it
     outputResult()
 
+    testResult()
 
 if __name__ == '__main__':
     main()
