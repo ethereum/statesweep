@@ -62,7 +62,7 @@ update: there are tons of transactions to 0x6a0a0fc761c612c340a0e98d33b37a75e526
 Full node results:
 6a0a0fc761c612c340a0e98d33b37a75e5268472 contains an empty account
 8a2e29e7d66569952ecffae4ba8acb49c1035b6f is also empty
-0x7c20218efc2e07c8fe2532ff860d4a5d8287cb31 is known to have identical code to its ETH depolyment
+7c20218efc2e07c8fe2532ff860d4a5d8287cb31 is known to have identical code to its ETH depolyment
 
 nothing else with > 1000 txs from the histogram show suicides on the block explorers
 
