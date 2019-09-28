@@ -69,3 +69,16 @@ nothing else with > 1000 txs from the histogram show suicides on the block explo
 
 state_bloat_txs -> input txhash blh gasused
 final -> seed, num
+
+
+ok so i am officially leaving it with 1 step left in order to make final.json
+  1: Either I can try to get the shitty python script to take care of everything
+  2: I can use bignum library to guess how "seed" was made. its from some sort of process on blh and input but it will take abit of fiddling to get the same results (can be ched against EF data)
+
+Then of course there is the matter of running a server to send the txs
+  check that the addresses all (were) indeed empty
+  get some funding
+  make a process that sends idk 20 transactions per minute for about 24 hours
+  make sure it tallies off completed ones
+  run it for a few seconds first
+  
