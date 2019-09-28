@@ -82,3 +82,5 @@ Then of course there is the matter of running a server to send the txs
   make sure it tallies off completed ones
   run it for a few seconds first
   
+
+for ETH there were : Total suicides: 15967160
