@@ -1,7 +1,7 @@
 var Rpc = require('isomorphic-rpc')
 var rpc = new Rpc()
 
-var json = require('../data/state_bloat_transactions_original.json'); // ETH data
+var json = require('./data/state-sweep-0x7c.json'); // ETH data
 console.log("json.length = ", json.length)
 
 var fs = require("fs");
@@ -25,7 +25,7 @@ async function zip(){
   }
   // console.log("\nSBTO\n", sbto)
 
-  fs.writeFile("./data/state_bloat_transactions_original.json", JSON.stringify(sbto), (err) => {
+  fs.writeFile("./data/state_bloat_transactions_original_etc.json", JSON.stringify(sbto), (err) => {
       if (err) {
           console.error(err);
           return;

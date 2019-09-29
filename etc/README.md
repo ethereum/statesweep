@@ -71,9 +71,8 @@ state_bloat_txs -> input txhash blh gasused
 final -> seed, num
 
 
-ok so i am officially leaving it with 1 step left in order to make final.json
-  1: Either I can try to get the shitty python script to take care of everything
-  2: I can use bignum library to guess how "seed" was made. its from some sort of process on blh and input but it will take abit of fiddling to get the same results (can be ched against EF data)
+ok so officiallygot the last step left done using the python script  (making final_data.json from state_bloat_transactions.json) 
+
 
 Then of course there is the matter of running a server to send the txs
   check that the addresses all (were) indeed empty
@@ -81,6 +80,18 @@ Then of course there is the matter of running a server to send the txs
   make a process that sends idk 20 transactions per minute for about 24 hours
   make sure it tallies off completed ones
   run it for a few seconds first
-  
 
-for ETH there were : Total suicides: 15967160
+ok, I got the python file to run, and it made the final data file
+
+for ETH Total suicides: 15967160
+for ETC Total suicides: 13785000
+
+deploying the sweeper contract at address: 0x39856bb3305997aD7acA33f8b21a8af9B86B79F4
+source is verified [here](https://blockscout.com/etc/mainnet/address/0x39856bb3305997ad7aca33f8b21a8af9b86b79f4/contracts)
+
+all thats left now is to send the sweep transactions. For this I can run a node server. But it has to sign the transactions, and its very important to track which ones have been sent.
+
+So - I need another json file that saves every x seconds, with the same data as final_data (input and num), but also contains the txhash of the tx that supposedly go mined.
+
+when it starts it should check for the last transaction hash
+

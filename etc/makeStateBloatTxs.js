@@ -2,7 +2,7 @@ var Rpc = require('isomorphic-rpc')
 var rpc = new Rpc()
 
 var fs = require("fs");
-var orig = require('./data/state_bloat_transactions_original.json');
+var orig = require('./data/state_bloat_transactions_original_etc.json');
 
 
 var output = []
@@ -28,7 +28,7 @@ async function run(){
     output.push(currTx)
   }
 
-  fs.writeFile("./data/state_bloat_transactions.json", JSON.stringify(output), (err) => {
+  fs.writeFile("./data/state_bloat_transactions_etc.json", JSON.stringify(output), (err) => {
       if (err) {
           console.error(err);
           return;
